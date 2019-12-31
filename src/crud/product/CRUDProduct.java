@@ -6,7 +6,9 @@
 package crud.product;
 
 import crud.product.api.ProductAPI;
+import crud.product.models.Produit;
 import java.sql.Connection;
+import java.util.List;
 
 /**
  *
@@ -18,15 +20,7 @@ public class CRUDProduct {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        Connection con
-                = new ProductAPI().dbConnection();
-
-        if (con == null) {
-            System.out.println("error");
-        } else {
-            System.out.println("success");
-        }
+ 
     }
 
 }
