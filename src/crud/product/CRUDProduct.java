@@ -20,7 +20,8 @@ public class CRUDProduct {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
- 
+        MainMenu mainMenuFrame = new MainMenu();
+        mainMenuFrame.setVisible(true);
     }
 
 }

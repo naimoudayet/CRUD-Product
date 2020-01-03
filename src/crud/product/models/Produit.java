@@ -11,6 +11,7 @@ package crud.product.models;
  */
 public class Produit {
 
+    // tous les champs de table
     private int id;
     private String designation;
     private String description;

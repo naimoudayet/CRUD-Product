@@ -16,14 +16,19 @@ import java.util.List;
 // DAO: data access object
 public interface ProductDao {
 
+    // method pour ajouter un produit
     void add(Produit produit);
 
+    // method pour supprimer un produit
     void delete(Produit produit);
 
+    // method pour modifier un produit
     void update(Produit produit);
 
+    // method pour afficher tous les produits
     List<Produit> showAll();
-
+    
+    // method pour affiche un seul produit
     Produit showById(int id);
 
 }

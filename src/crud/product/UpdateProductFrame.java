@@ -6,6 +6,7 @@
 package crud.product;
 
 import crud.product.api.ProductAPI;
+import crud.product.dao.ProductDao;
 import crud.product.models.Produit;
 import javax.swing.JOptionPane;
 
@@ -13,13 +14,24 @@ import javax.swing.JOptionPane;
  *
  * @author naim_
  */
-public class AddProductFrame extends javax.swing.JFrame {
+public class UpdateProductFrame extends javax.swing.JFrame {
+
+    int produit_id;
+    Produit produit;
+    ProductAPI productAPI = new ProductAPI();
 
     /**
-     * Creates new form AddProductFrame
+     * Creates new form UpdateProductFrame
      */
-    public AddProductFrame() {
+    public UpdateProductFrame() {
         initComponents();
+
+        produit = productAPI.showById(MainMenu.produit.getId());
+
+        textFieldDesignationUP.setText(produit.getDesignation());
+        textFieldDescriptionUP.setText(produit.getDescription());
+        textFieldQteUP.setText(String.valueOf(produit.getQte()));
+
     }
 
     /**
@@ -32,24 +44,28 @@ public class AddProductFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        textFieldDesignationAP = new javax.swing.JTextField();
+        textFieldDesignationUP = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        textFieldDescriptionAP = new javax.swing.JTextField();
+        textFieldDescriptionUP = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        textFieldQteAP = new javax.swing.JTextField();
-        btnCancelAP = new javax.swing.JButton();
-        btnAddAP = new javax.swing.JButton();
+        textFieldQteUP = new javax.swing.JTextField();
+        btnCancelUP = new javax.swing.JButton();
+        btnSaveUP = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add Product");
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(282, 366));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Désignation: ");
 
-        textFieldDesignationAP.addActionListener(new java.awt.event.ActionListener() {
+        textFieldDesignationUP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldDesignationAPActionPerformed(evt);
+                textFieldDesignationUPActionPerformed(evt);
             }
         });
 
@@ -57,22 +73,22 @@ public class AddProductFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Quantité: ");
 
-        btnCancelAP.setText("Cancel");
-        btnCancelAP.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelUP.setText("Cancel");
+        btnCancelUP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelAPActionPerformed(evt);
+                btnCancelUPActionPerformed(evt);
             }
         });
 
-        btnAddAP.setText("Add");
-        btnAddAP.addActionListener(new java.awt.event.ActionListener() {
+        btnSaveUP.setText("Save");
+        btnSaveUP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddAPActionPerformed(evt);
+                btnSaveUPActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Add Product");
+        jLabel4.setText("Update Product");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,9 +100,9 @@ public class AddProductFrame extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCancelAP, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnCancelUP, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36)
-                                .addComponent(btnAddAP, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnSaveUP, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -94,9 +110,9 @@ public class AddProductFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textFieldDescriptionAP, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(textFieldDesignationAP)
-                                    .addComponent(textFieldQteAP)))))
+                                    .addComponent(textFieldDescriptionUP, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(textFieldDesignationUP)
+                                    .addComponent(textFieldQteUP)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(jLabel4)))
@@ -110,34 +126,34 @@ public class AddProductFrame extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(textFieldDesignationAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldDesignationUP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(textFieldDescriptionAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldDescriptionUP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(textFieldQteAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldQteUP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelAP)
-                    .addComponent(btnAddAP))
+                    .addComponent(btnCancelUP)
+                    .addComponent(btnSaveUP))
                 .addGap(54, 54, 54))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textFieldDesignationAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldDesignationAPActionPerformed
+    private void textFieldDesignationUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldDesignationUPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldDesignationAPActionPerformed
+    }//GEN-LAST:event_textFieldDesignationUPActionPerformed
 
-    private void btnAddAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAPActionPerformed
+    private void btnSaveUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveUPActionPerformed
 
-        String designation = textFieldDesignationAP.getText();
-        String description = textFieldDescriptionAP.getText();
-        String qte = textFieldQteAP.getText();
+        String designation = textFieldDesignationUP.getText();
+        String description = textFieldDescriptionUP.getText();
+        String qte = textFieldQteUP.getText();
 
         // validation data
         if (designation.isEmpty()) {
@@ -151,31 +167,35 @@ public class AddProductFrame extends javax.swing.JFrame {
                     showMessageDialog(null, "svp entrez la quantité");
         } else {
             // insert data
-            Produit produit = new Produit(
-                    designation,
-                    description,
-                    Integer.valueOf(qte));
+            produit.setDesignation(designation);
+            produit.setDescription(description);
+            produit.setQte(Integer.valueOf(qte));
 
             ProductAPI productAPI = new ProductAPI();
-            productAPI.add(produit);
+            productAPI.update(produit);
             JOptionPane.
-                    showMessageDialog(null, "produit ajouter");
-            onBackPressed();
+                    showMessageDialog(null, "produit modifier");
         }
-        // navigate to Main Menu
-
-    }//GEN-LAST:event_btnAddAPActionPerformed
-
-    private void btnCancelAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAPActionPerformed
         onBackPressed();
-    }//GEN-LAST:event_btnCancelAPActionPerformed
+        // navigate to Main Menu
+    }//GEN-LAST:event_btnSaveUPActionPerformed
 
-    private void onBackPressed() {
+     private void onBackPressed() {
 
+         // navigation entre les interfaces
         MainMenu mainMenu = new MainMenu();
         mainMenu.setVisible(true);
         this.dispose();
     }
+    
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnCancelUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelUPActionPerformed
+        onBackPressed();
+    }//GEN-LAST:event_btnCancelUPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,34 +214,34 @@ public class AddProductFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateProductFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddProductFrame().setVisible(true);
+                new UpdateProductFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddAP;
-    private javax.swing.JButton btnCancelAP;
+    private javax.swing.JButton btnCancelUP;
+    private javax.swing.JButton btnSaveUP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField textFieldDescriptionAP;
-    private javax.swing.JTextField textFieldDesignationAP;
-    private javax.swing.JTextField textFieldQteAP;
+    private javax.swing.JTextField textFieldDescriptionUP;
+    private javax.swing.JTextField textFieldDesignationUP;
+    private javax.swing.JTextField textFieldQteUP;
     // End of variables declaration//GEN-END:variables
-
 }

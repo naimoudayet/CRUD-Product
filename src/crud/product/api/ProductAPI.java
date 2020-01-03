@@ -28,9 +28,12 @@ public class ProductAPI implements ProductDao {
     @Override
     public void add(Produit produit) {
         try {
+            // cnxn au base de donnée
             c = dbConnection();
+            // initialisation du statement
             s = c.createStatement();
 
+            // requette
             query
                     = "INSERT INTO produit(designation, description, qte) "
                     + "VALUES ('"
@@ -41,6 +44,7 @@ public class ProductAPI implements ProductDao {
                     + produit.getQte()
                     + "')";
 
+            // execution du requette
             s.execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,8 +96,10 @@ public class ProductAPI implements ProductDao {
             c = dbConnection();
             s = c.createStatement();
 
+            // stockage du résultat du requette
             ResultSet rs = s.executeQuery("SELECT * FROM produit");
 
+            // parcours du résultat pour récupérer les produits
             while (rs.next()) {
 
                 Produit p = new Produit(
